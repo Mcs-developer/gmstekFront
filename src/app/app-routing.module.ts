@@ -15,7 +15,13 @@ import { AuthGuard } from './shared/guards/auth.guard';
         // data: { preload: true },
         loadChildren: './policies/policies.module#PoliciesModule'
       },
-      { path: '', redirectTo: 'policies', pathMatch: 'full' },
+      {
+        path: 'invoices',
+        canActivate: [ AuthGuard ],
+        // data: { preload: true },
+        loadChildren: './invoices/invoices.module#InvoicesModule'
+      },
+      { path: '', redirectTo: 'invoices', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ])
   ],
