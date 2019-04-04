@@ -1,0 +1,40 @@
+
+
+<div class="row justify-content-sm-center">
+  <div class="col-sm-6 col-md-4">
+
+    <div class="card border-info text-center">
+      <div class="card-header">
+        Register
+      </div>
+      <div class="card-body">
+        <h4 class="text-center">Growth Acceleration Partners</h4>
+        <form *ngIf="!loading" class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+          <input type="text"
+                 formControlName="username"
+                 class="form-control mb-2" 
+                 placeholder="UserName" 
+                 required 
+                 autofocus>
+          <input type="text"
+                 formControlName="email"
+                 class="form-control mb-2" 
+                 placeholder="Email" 
+                 required 
+                 autofocus>
+          <input type="password" 
+                 formControlName="password"
+                 class="form-control mb-2"
+                 placeholder="Password"
+                 required>
+          <button class="btn btn-lg btn-primary btn-block mb-1" 
+                  type="submit" 
+                  [disabled]="!registerForm.valid">Register</button>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+        <app-loading *ngIf="loading"></app-loading>
+      </div>
+    </div>
+    <a [routerLink]="['/login']"  *ngIf="!loading" class="float-right">Go to login</a>
+  </div>
+</div>

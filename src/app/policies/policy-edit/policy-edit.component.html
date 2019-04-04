@@ -1,0 +1,158 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <form  [formGroup]="policyForm" novalidate>
+
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="policyNameId">Policy Name</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                        id="policyNameId"
+                        type="text"
+                        placeholder="Name (required)"
+                        required
+                        minlength="3"
+                        formControlName="name"
+                        [ngClass]="{'is-invalid': (policyForm.get('name').touched || policyForm.get('name').dirty) && !policyForm.get('name').valid }" />
+                <span class="invalid-feedback">
+                  <span *ngIf="policyForm.get('name').errors?.required">
+                    Product name is required.
+                  </span>
+                  <span *ngIf="policyForm.get('name').errors?.minlength">
+                    Product name must be at least three characters.
+                  </span>
+                </span>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="policyCostId">Policy Cost</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                        id="policyCostId"
+                        type="number"
+                        placeholder="Cost (required)"
+                        required
+                        formControlName="costPolicy"
+                        [ngClass]="{'is-invalid': (policyForm.get('costPolicy').touched || policyForm.get('costPolicy').dirty) && !policyForm.get('costPolicy').valid }" />
+                <span class="invalid-feedback">
+                  <span *ngIf="policyForm.get('costPolicy').errors?.required">
+                    Policy cost is required.
+                  </span>
+                </span>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="coveragePercentId">Coverage Percent</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                        id="coveragePercentId"
+                        type="number"
+                        placeholder="Percent (required)"
+                        required
+                        formControlName="coveragePercent"
+                        [ngClass]="{'is-invalid': (policyForm.get('coveragePercent').touched || policyForm.get('coveragePercent').dirty) && !policyForm.get('coveragePercent').valid }" />
+                <span class="invalid-feedback">
+                  <span *ngIf="policyForm.get('coveragePercent').errors?.required">
+                    Coverage percent is required.
+                  </span>
+                </span>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="coveragePeriodId">Coverage Period</label>
+            <div class="col-md-8">
+                <input class="form-control"
+                        id="coveragePeriodId"
+                        type="number"
+                        placeholder="Period (required)"
+                        required
+                        formControlName="coveragePeriod"
+                        [ngClass]="{'is-invalid': (policyForm.get('coveragePeriod').touched || policyForm.get('coveragePeriod').dirty) && !policyForm.get('coveragePeriod').valid }" />
+                <span class="invalid-feedback">
+                  <span *ngIf="policyForm.get('coveragePeriod').errors?.required">
+                    Coverage period is required.
+                  </span>
+                </span>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="startPolicyId">Date Validity</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                  <input class="form-control"
+                        id="startPolicyId"
+                        ngbDatepicker 
+                        #d="ngbDatepicker"
+                        placeholder="Period (required)"
+                        required
+                        formControlName="startPolicy"
+                        [ngClass]="{'is-invalid': (policyForm.get('startPolicy').touched || policyForm.get('startPolicy').dirty) && !policyForm.get('startPolicy').valid }" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+                        </div>
+                  <span class="invalid-feedback">
+                    <span *ngIf="policyForm.get('coveragePeriod').errors?.required">
+                      Coverage period is required.
+                    </span>
+                  </span>
+              </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                    for="riskTypeId">Risk Type</label>
+            <div class="col-md-8">
+                <select class="custom-select"
+                        formControlName="riskTypeId"
+                        id="riskTypeId"
+                        [ngClass]="{'is-invalid': (policyForm.get('riskTypeId').touched || policyForm.get('riskTypeId').dirty) && !policyForm.get('riskTypeId').valid }">
+                    <option value="">Select Risk Type</option>
+                    <option *ngFor="let risk of riskTypes" [value]="risk.id">{{risk.name}}</option>
+                </select>
+                <span class="invalid-feedback">
+                  <span *ngIf="policyForm.get('riskTypeId').errors?.required">
+                    Risk type is required.
+                  </span>
+                </span>
+              </div>
+        </div>
+        <div class="form-group row mb-2">
+          <div class="col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px"
+                    type="button"
+                    [disabled]="!policyForm.valid"
+                    (click)="savePolicy()">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['/policies']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-warning"
+                    style="width:80px"
+                    type="button"
+                    title="Delete this product"
+                    (click)="deletePolicy()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
