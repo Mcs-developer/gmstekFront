@@ -2,7 +2,7 @@
 <button *ngIf="invoices || invoices?.length > 0" 
         type="button" 
         class="btn btn-outline-primary"
-        [routerLink]="['/invoices', 0, 'edit']">New</button>
+        [routerLink]="['/invoices', 'new']">New</button>
 <div class="alert alert-danger"
     *ngIf="errorMessage">{{errorMessage}}
 </div>
@@ -19,6 +19,7 @@
         <p class="card-text m-0">Percent: {{ invoice.coveragePercent}} %</p>
         <p class="card-text m-0 mb-2">Period: {{ invoice.coveragePeriod}} months</p> -->
         <a [routerLink]="['/invoices', invoice.invoiceId, 'edit']" class="card-link">Edit</a>
+        <a [routerLink]="['/invoices', invoice.invoiceId, 'view']" class="card-link">View</a>
       </div>
     </div>
   </div>

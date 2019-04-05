@@ -7,6 +7,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { InvoiceNewComponent } from './invoice-new/invoice-new.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 @NgModule({
   imports: [
@@ -16,6 +18,6 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbDatepickerModule,
   ],
-  declarations: [InvoiceListComponent, InvoiceEditComponent]
+  declarations: [InvoiceListComponent, InvoiceEditComponent, InvoiceNewComponent, InvoiceViewComponent]
 })
 export class InvoicesModule { }

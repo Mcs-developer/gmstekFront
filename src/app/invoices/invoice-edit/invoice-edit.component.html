@@ -1,32 +1,50 @@
-<!-- <button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
-<mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Add Items</ng-template>
-
-    </form>
-  </mat-step>
-  <!-- <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <div>
-        <input  placeholder="Address" formControlName="secondCtrl" required>
+<div class="card">
+  <div class="card-header">
+      Edit Invoice {{invoice?.invoiceId}}
+  </div>
+  <div class="card-body">
+    <form [formGroup]="formEdit" class="mt-4">
+      <div formArrayName="items"
+      *ngFor="let item of formEdit.get('items').controls; let i = index;">
+        <div class="form-group row" [formGroupName]="i">
+          <label class="col-sm-4 col-form-label">{{formEdit.controls.items.controls[i].controls.name.value}}</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" formControlName="unitValue" placeholder="Unit Value">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" formControlName="quantity"placeholder="Quantity">
+          </div>
+        </div>
       </div>
-      <div>
-        <button matStepperPrevious>Back</button>
-        <button matStepperNext>Next</button>
-      </div>
+      <div class="form-group row mb-2">
+          <div class="col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px"
+                    type="button"
+                    [disabled]="!formEdit.valid"
+                    (click)="updateInvoice()">
+              Update
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['/invoices']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-danger"
+                    style="width:80px"
+                    type="button"
+                    title="Delete this product"
+                    (click)="deleteInvoice()">
+              Delete
+            </button>
+          </div>
+        </div>
     </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button matStepperPrevious>Back</button>
-      <button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step> -->
-</mat-vertical-stepper>
+  </div>
+</div>
 
+<div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>

@@ -18,4 +18,20 @@ export class InvoiceService {
       })
     );
   }
+
+  getInvoice(id) {
+    return this.http.get<any>(`${environment.api}/invoice/${id}`)
+  }
+
+  saveInvoice(request) {
+    return this.http.post(`${environment.api}/invoice`, request);
+  }
+
+  updateInvoice(id, items){
+    return this.http.put(`${environment.api}/invoice/${id}`, items);
+  }
+
+  deleteInvoice(id) {
+    return this.http.delete(`${environment.api}/invoice/${id}`);
+  }
 }

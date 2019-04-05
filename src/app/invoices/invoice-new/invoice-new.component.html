@@ -1,0 +1,68 @@
+<!-- <button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-vertical-stepper linear="true" #stepper>
+  <mat-step>
+    <div>
+      <ng-template matStepLabel>Add Items</ng-template>
+      <div class="row mt-3">
+        <div class="col-3" *ngFor="let item of items">
+          <div class="card mb-2">
+            <img [src]="item.imageUrl" class="card-img-top" alt="item.code">
+            <div class="card-body">
+              <h5 class="card-title">{{item.name}}</h5>
+              <button type="button" class="btn btn-outline-primary" [disabled]="item.isAdded"
+                (click)="addItems(item)">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary my-3" matStepperNext
+        [disabled]="firstFormGroup.controls.items.length == 0">Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Detail</ng-template>
+      <div>
+        <div class="px-4 py-2" formArrayName="items"
+          *ngFor="let item of firstFormGroup.get('items').controls; let i = index;">
+          <div class="form-inline" [formGroupName]="i">
+            <div class="form-group mb-2">
+              <label for="staticEmail2">{{firstFormGroup.controls.items.controls[i].controls.name.value}}</label>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <input type="text" class="form-control" formControlName="unitValue" placeholder="Unit Value">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <input type="text" class="form-control" formControlName="quantity" placeholder="Quantity">
+            </div>
+            <button type="button" class="btn btn-primary mb-2" (click)="remoteItems(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button matStepperPrevious class="btn btn-primary">Back</button>
+        <button matStepperNext class="btn btn-primary ml-2">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Done</ng-template>
+    <form [formGroup]="secondFormGroup">
+      <div class="form-group">
+        <label>Nombre Cliente</label>
+        <input type="text" class="form-control" formControlName="clientName">
+      </div>
+    </form>
+
+    <div>
+      <button matStepperPrevious class="btn btn-primary">Back</button>
+      <button (click)="saveInvoice()" class="btn btn-primary ml-2">Save</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+
+<div class="alert alert-danger"
+  *ngIf="errorMessage">{{errorMessage}}
+</div>
