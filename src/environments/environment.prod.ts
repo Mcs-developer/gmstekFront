@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'https://testinsurancegap.azurewebsites.net/api',
+  api: 'https://gmstek.azurewebsites.net/api',
   production: true
 };
