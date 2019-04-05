@@ -5,7 +5,7 @@
   <div class="card-body">
     <form [formGroup]="formEdit" class="mt-4">
       <div formArrayName="items"
-      *ngFor="let item of formEdit.get('items').controls; let i = index;">
+      *ngFor="let item of formEdit.controls.items?.value; let i = index;">
         <div class="form-group row" [formGroupName]="i">
           <label class="col-sm-4 col-form-label">{{formEdit.controls.items.controls[i].controls.name.value}}</label>
           <div class="col-sm-2">

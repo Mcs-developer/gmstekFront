@@ -17,8 +17,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary my-3" matStepperNext
-        [disabled]="firstFormGroup.controls.items.length == 0">Next</button>
+      <button class="btn btn-primary my-3" matStepperNext >Next</button>
     </div>
   </mat-step>
   <mat-step [stepControl]="firstFormGroup">
@@ -26,7 +25,7 @@
       <ng-template matStepLabel>Detail</ng-template>
       <div>
         <div class="px-4 py-2" formArrayName="items"
-          *ngFor="let item of firstFormGroup.get('items').controls; let i = index;">
+          *ngFor="let item of firstFormGroup.controls.items?.value; let i = index;">
           <div class="form-inline" [formGroupName]="i">
             <div class="form-group mb-2">
               <label for="staticEmail2">{{firstFormGroup.controls.items.controls[i].controls.name.value}}</label>
