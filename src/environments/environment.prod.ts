@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'https://gmstek.azurewebsites.net/api',
+  api: 'https://gmstekback.azurewebsites.net/api',
   production: true
 };
